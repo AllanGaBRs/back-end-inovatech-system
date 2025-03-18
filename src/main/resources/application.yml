@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: inovatech
+  profiles:
+    active: test
+
