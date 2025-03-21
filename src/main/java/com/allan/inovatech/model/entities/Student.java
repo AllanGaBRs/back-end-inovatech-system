@@ -40,21 +40,14 @@ public class Student {
     @Column
     private String changeCode;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
     private List<TaskKanban> tasks = new ArrayList<TaskKanban>();
+
+    @OneToMany(mappedBy = "student")
+    private List<Suggestion> suggestions = new ArrayList<Suggestion>();
 
     public Student(){
 
-    }
-
-    public Student(Long id, String name, String email, Course course, String password, LocalDate registerDate, StudentStatus studentStatus) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.course = course;
-        this.password = password;
-        this.registerDate = registerDate;
-        this.studentStatus = studentStatus;
     }
 
     public Long getId() {

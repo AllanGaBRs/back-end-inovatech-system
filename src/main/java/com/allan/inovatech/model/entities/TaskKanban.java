@@ -34,20 +34,11 @@ public class TaskKanban {
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "id_adm")
+    @JoinColumn(name = "id_adm", nullable = false)
     private Adm adm;
 
     public TaskKanban(){
 
-    }
-
-    public TaskKanban(Integer id, String title, String taskDescription, TaskStatus sts, LocalDate beginDate, LocalDate endDate) {
-        this.id = id;
-        this.title = title;
-        this.taskDescription = taskDescription;
-        this.sts = sts;
-        this.beginDate = beginDate;
-        this.endDate = endDate;
     }
 
     public Integer getId() {
@@ -114,5 +105,15 @@ public class TaskKanban {
         this.adm = adm;
     }
 
-
+    @Override
+    public String toString() {
+        return "TaskKanban{" +
+                "title='" + title + '\'' +
+                ", taskDescription='" + taskDescription + '\'' +
+                ", sts=" + sts +
+                ", endDate=" + endDate +
+                ", student=" + student +
+                ", beginDate=" + beginDate +
+                '}';
+    }
 }

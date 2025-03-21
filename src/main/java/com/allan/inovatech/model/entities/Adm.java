@@ -2,6 +2,7 @@ package com.allan.inovatech.model.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,17 +26,10 @@ public class Adm {
     private String changeCodes;
 
     @OneToMany(mappedBy = "adm")
-    private List<TaskKanban> tasks;
+    private List<TaskKanban> tasks = new ArrayList<TaskKanban>();
 
     public Adm(){
 
-    }
-
-    public Adm(String password, Integer id, String name, String email) {
-        this.password = password;
-        this.id = id;
-        this.name = name;
-        this.email = email;
     }
 
     public Integer getId() {
