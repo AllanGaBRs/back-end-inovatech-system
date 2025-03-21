@@ -21,6 +21,9 @@ public class Adm {
     @Column(name = "keypass", nullable = false)
     private String password;
 
+    @Column
+    private String changeCodes;
+
     @OneToMany(mappedBy = "adm")
     private List<TaskKanban> tasks;
 
@@ -75,4 +78,11 @@ public class Adm {
         this.email = email;
     }
 
+    public String getChangeCodes() {
+        return changeCodes;
+    }
+
+    public void setChangeCodes(String changeCodes) {
+        this.changeCodes = changeCodes;
+    }
 }

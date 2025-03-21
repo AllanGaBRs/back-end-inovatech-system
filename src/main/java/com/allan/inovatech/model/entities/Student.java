@@ -5,6 +5,7 @@ import com.allan.inovatech.model.enums.StudentStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -36,11 +37,11 @@ public class Student {
     @Column
     private StudentStatus studentStatus = StudentStatus.AT;
 
-    @OneToOne(mappedBy = "student")
-    private PasswordChangeCode passwordChangeCodes;
+    @Column
+    private String changeCode;
 
     @OneToMany(mappedBy = "student")
-    private List<TaskKanban> tasks;
+    private List<TaskKanban> tasks = new ArrayList<TaskKanban>();
 
     public Student(){
 
@@ -112,19 +113,19 @@ public class Student {
         this.studentStatus = studentStatus;
     }
 
-    public PasswordChangeCode getPasswordChangeCodes() {
-        return passwordChangeCodes;
+    public String getChangeCode() {
+        return changeCode;
     }
 
-    public void setPasswordChangeCodes(PasswordChangeCode passwordChangeCodes) {
-        this.passwordChangeCodes = passwordChangeCodes;
+    public void setChangeCodes(String changeCode) {
+        this.changeCode = changeCode;
     }
 
     public List<TaskKanban> getTasks() {
         return tasks;
     }
 
-    public void setTasks(List<TaskKanban> tasks) {
-        this.tasks = tasks;
+    public void addTasks(TaskKanban task) {
+        tasks.add(task);
     }
 }
