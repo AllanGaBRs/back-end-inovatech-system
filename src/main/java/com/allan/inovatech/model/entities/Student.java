@@ -3,12 +3,9 @@ package com.allan.inovatech.model.entities;
 import com.allan.inovatech.model.enums.Course;
 import com.allan.inovatech.model.enums.StudentStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.NaturalId;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_student")
@@ -38,6 +35,12 @@ public class Student {
     @Enumerated(EnumType.STRING)
     @Column
     private StudentStatus studentStatus = StudentStatus.AT;
+
+    @OneToOne(mappedBy = "student")
+    private PasswordChangeCode passwordChangeCodes;
+
+    @OneToMany(mappedBy = "student")
+    private List<TaskKanban> tasks;
 
     public Student(){
 
@@ -107,5 +110,21 @@ public class Student {
 
     public void setStudentStatus(StudentStatus studentStatus) {
         this.studentStatus = studentStatus;
+    }
+
+    public PasswordChangeCode getPasswordChangeCodes() {
+        return passwordChangeCodes;
+    }
+
+    public void setPasswordChangeCodes(PasswordChangeCode passwordChangeCodes) {
+        this.passwordChangeCodes = passwordChangeCodes;
+    }
+
+    public List<TaskKanban> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<TaskKanban> tasks) {
+        this.tasks = tasks;
     }
 }
