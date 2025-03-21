@@ -35,7 +35,7 @@ public class Student {
 
     @Enumerated(EnumType.STRING)
     @Column
-    private StudentStatus studentStatus = StudentStatus.AT;
+    private StudentStatus studentStatus = StudentStatus.ATIVO;
 
     @Column
     private String changeCode;
@@ -45,6 +45,9 @@ public class Student {
 
     @OneToMany(mappedBy = "student")
     private List<Suggestion> suggestions = new ArrayList<Suggestion>();
+
+    @OneToMany(mappedBy = "student")
+    private List<Report> reports = new ArrayList<Report>();
 
     public Student(){
 
@@ -120,5 +123,21 @@ public class Student {
 
     public void addTasks(TaskKanban task) {
         tasks.add(task);
+    }
+
+    public List<Suggestion> getSuggestions() {
+        return suggestions;
+    }
+
+    public void addSuggestion(Suggestion suggestion) {
+        this.suggestions.add(suggestion);
+    }
+
+    public List<Report> getReports() {
+        return reports;
+    }
+
+    public void setReports(Report report) {
+        this.reports.add(report);
     }
 }

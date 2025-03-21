@@ -21,7 +21,7 @@ public class TaskKanban {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TaskStatus sts = TaskStatus.AF;
+    private TaskStatus sts = TaskStatus.AFAZER;
 
     @Column(nullable = false)
     private LocalDate beginDate;

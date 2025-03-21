@@ -2,6 +2,7 @@ package com.allan.inovatech.config;
 
 import com.allan.inovatech.model.entities.Adm;
 import com.allan.inovatech.model.entities.Student;
+import com.allan.inovatech.model.entities.Suggestion;
 import com.allan.inovatech.model.entities.TaskKanban;
 import com.allan.inovatech.model.enums.Course;
 import com.allan.inovatech.repository.AdmRepository;
@@ -91,8 +92,15 @@ public class TestConfig implements CommandLineRunner {
         taskKanbanRepository.save(tk2);
         taskKanbanRepository.save(tk3);
 
-        Student test = studentRepository.findById(Long.valueOf("1")).get();
+        Student test = studentRepository.findById(Long.valueOf("2")).get();
         test.getTasks().forEach(System.out::println);
 
+
+        Suggestion sg1 = new Suggestion();
+        sg1.setSuggestionTitle("Adciona nao sei");
+        sg1.setSuggestionDescription("Faz nao sei oq la");
+        sg1.setStudent(st1);
+
+        suggestionRepository.save(sg1);
     }
 }

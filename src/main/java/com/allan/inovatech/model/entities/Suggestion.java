@@ -1,5 +1,6 @@
 package com.allan.inovatech.model.entities;
 
+import com.allan.inovatech.model.enums.Status;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,8 +17,12 @@ public class Suggestion {
     @Column(nullable = false)
     private String suggestionDescription;
 
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Status status = Status.PENDENTE;
+
     @ManyToOne
-    @JoinColumn(name = "id_student")
+    @JoinColumn(name = "id_student", nullable = false)
     private Student student;
 
     public Suggestion(){
@@ -54,5 +59,13 @@ public class Suggestion {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
