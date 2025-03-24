@@ -15,7 +15,7 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private Long id;
+    private Integer id;
 
     @Column(name = "studentName", nullable = false)
     private String name;
@@ -40,6 +40,11 @@ public class Student {
     @Column
     private String changeCode;
 
+    @Lob
+    //@Column(columnDefinition = "BYTEA") POSTGRESS
+    @Column(columnDefinition = "BLOB")
+    private byte[] profilePic;
+
     @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
     private List<TaskKanban> tasks = new ArrayList<TaskKanban>();
 
@@ -53,11 +58,11 @@ public class Student {
 
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -113,7 +118,7 @@ public class Student {
         return changeCode;
     }
 
-    public void setChangeCodes(String changeCode) {
+    public void setChangeCode(String changeCode) {
         this.changeCode = changeCode;
     }
 
@@ -139,5 +144,14 @@ public class Student {
 
     public void setReports(Report report) {
         this.reports.add(report);
+    }
+
+    public byte[] getProfilePic() {
+        return profilePic;
+    }
+
+
+    public void setProfilePic(byte[] profilePic) {
+        this.profilePic = profilePic;
     }
 }

@@ -1,20 +1,16 @@
 package com.allan.inovatech.config;
 
-import com.allan.inovatech.model.entities.Adm;
-import com.allan.inovatech.model.entities.Student;
-import com.allan.inovatech.model.entities.Suggestion;
-import com.allan.inovatech.model.entities.TaskKanban;
+import com.allan.inovatech.model.entities.*;
 import com.allan.inovatech.model.enums.Course;
-import com.allan.inovatech.repository.AdmRepository;
-import com.allan.inovatech.repository.StudentRepository;
-import com.allan.inovatech.repository.SuggestionRepository;
-import com.allan.inovatech.repository.TaskKanbanRepository;
+import com.allan.inovatech.model.enums.EntityType;
+import com.allan.inovatech.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Configuration
 @Profile("test")
@@ -32,6 +28,11 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private SuggestionRepository suggestionRepository;
 
+    @Autowired
+    private ReportRepository reportRepository;
+
+    @Autowired
+    private FeedbackRepository feedbackRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -92,7 +93,7 @@ public class TestConfig implements CommandLineRunner {
         taskKanbanRepository.save(tk2);
         taskKanbanRepository.save(tk3);
 
-        Student test = studentRepository.findById(Long.valueOf("2")).get();
+        Student test = studentRepository.findById(2).get();
         test.getTasks().forEach(System.out::println);
 
 
@@ -102,5 +103,21 @@ public class TestConfig implements CommandLineRunner {
         sg1.setStudent(st1);
 
         suggestionRepository.save(sg1);
+
+        Report rp1 = new Report();
+        rp1.setStudent(st1);
+        rp1.setReportDescription("Fiz isso, aquilo e bruu");
+        rp1.setAmountHours(LocalTime.of(1, 50));
+
+        reportRepository.save(rp1);
+
+        Feedback fb1 = new Feedback();
+        fb1.setAdm(adm1);
+        fb1.setEntityType(EntityType.REPORT);
+        fb1.setIdEntity(rp1.getId());
+        fb1.setMessage("Que relatorio bosta bixo");
+
+        feedbackRepository.save(fb1);
+
     }
 }
