@@ -1,5 +1,7 @@
 package com.allan.inovatech.controller;
 
+import com.allan.inovatech.dto.profile.StudentProfileDTO;
+import com.allan.inovatech.model.entities.Student;
 import com.allan.inovatech.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -7,12 +9,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/students")
 public class StudentController {
 
     @Autowired
     private StudentService studentService;
+
+    @GetMapping("/list")
+    public ResponseEntity<List<StudentProfileDTO>> listAll(){
+        List<StudentProfileDTO> listDTO = studentService.findAllStudents();
+        return ResponseEntity.ok().body(listDTO);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<StudentProfileDTO> findProfileById(@PathVariable Integer id){
+        StudentProfileDTO student = studentService.findStudentProfileById(id);
+        return ResponseEntity.ok().body(student);
+    }
 
     @PostMapping("/{id}/upload-profile-pic")
     public ResponseEntity<String> uploadProfilePic(@PathVariable Integer id,

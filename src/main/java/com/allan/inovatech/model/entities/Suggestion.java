@@ -25,7 +25,7 @@ public class Suggestion {
     @JoinColumn(name = "id_student", nullable = false)
     private Student student;
 
-    public Suggestion(){
+    public Suggestion() {
 
     }
 
@@ -68,4 +68,6 @@ public class Suggestion {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+
 }

@@ -37,7 +37,7 @@ public class TaskKanban {
     @JoinColumn(name = "id_adm", nullable = false)
     private Adm adm;
 
-    public TaskKanban(){
+    public TaskKanban() {
 
     }
 
