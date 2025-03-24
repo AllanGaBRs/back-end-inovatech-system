@@ -31,7 +31,7 @@ public class Student {
     private String password;
 
     @Column
-    private LocalDate registerDate;
+    private LocalDate registerDate = LocalDate.now();
 
     @Enumerated(EnumType.STRING)
     @Column
@@ -42,7 +42,7 @@ public class Student {
 
     @Lob
     //@Column(columnDefinition = "BYTEA") POSTGRESS
-    @Column(columnDefinition = "BLOB")
+    @Column(columnDefinition = "BLOB") //h2
     private byte[] profilePic;
 
     @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)

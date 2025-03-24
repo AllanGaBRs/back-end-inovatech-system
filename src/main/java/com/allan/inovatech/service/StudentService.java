@@ -1,6 +1,7 @@
 package com.allan.inovatech.service;
 
 import com.allan.inovatech.dto.profile.StudentProfileDTO;
+import com.allan.inovatech.dto.request.StudentRequestDTO;
 import com.allan.inovatech.model.entities.Student;
 import com.allan.inovatech.repository.StudentRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -28,6 +29,15 @@ public class StudentService {
         }
 
         return listDTO;
+    }
+
+    public Student createStudent(StudentRequestDTO dto){
+        Student student = new Student();
+        student.setName(dto.name());
+        student.setCourse(dto.course());
+        student.setEmail(dto.email());
+        student.setPassword(dto.password());
+        return studentRepository.save(student);
     }
 
     public StudentProfileDTO findStudentProfileById(Integer id){

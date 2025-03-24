@@ -1,9 +1,12 @@
 package com.allan.inovatech.controller;
 
 import com.allan.inovatech.dto.profile.StudentProfileDTO;
+import com.allan.inovatech.dto.request.StudentRequestDTO;
 import com.allan.inovatech.model.entities.Student;
 import com.allan.inovatech.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +28,15 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<StudentProfileDTO> findProfileById(@PathVariable Integer id){
+    public ResponseEntity<StudentProfileDTO> findProfileById(@Valid @PathVariable Integer id){
         StudentProfileDTO student = studentService.findStudentProfileById(id);
         return ResponseEntity.ok().body(student);
+    }
+
+    @PostMapping
+    public ResponseEntity<StudentProfileDTO> createStudent(@RequestBody @Valid StudentRequestDTO dto) {
+        Student student = studentService.createStudent(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(StudentProfileDTO.fromEntity(student));
     }
 
     @PostMapping("/{id}/upload-profile-pic")
