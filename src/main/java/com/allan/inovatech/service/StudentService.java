@@ -1,6 +1,7 @@
 package com.allan.inovatech.service;
 
 import com.allan.inovatech.dto.profile.StudentProfileDTO;
+import com.allan.inovatech.dto.request.get.StudentGetDTO;
 import com.allan.inovatech.dto.request.post.StudentPostDTO;
 import com.allan.inovatech.dto.request.put.StudentPutDTO;
 import com.allan.inovatech.model.entities.Student;
@@ -22,12 +23,12 @@ public class StudentService {
     private StudentRepository studentRepository;
 
     // Esse metodo deve ser alterado ou removido, fiz ele apenas para testar a listagem
-    public List<StudentProfileDTO> findAllStudents(){
+    public List<StudentGetDTO> findAllStudents(){
         List<Student> list = studentRepository.findAll();
-        List<StudentProfileDTO> listDTO = new ArrayList<StudentProfileDTO>();
+        List<StudentGetDTO> listDTO = new ArrayList<StudentGetDTO>();
 
         for (Student student : list) {
-            listDTO.add(StudentProfileDTO.fromEntity(student));
+            listDTO.add(StudentGetDTO.fromEntity(student));
         }
 
         return listDTO;

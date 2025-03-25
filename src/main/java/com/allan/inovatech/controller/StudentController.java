@@ -1,6 +1,7 @@
 package com.allan.inovatech.controller;
 
 import com.allan.inovatech.dto.profile.StudentProfileDTO;
+import com.allan.inovatech.dto.request.get.StudentGetDTO;
 import com.allan.inovatech.dto.request.post.StudentPostDTO;
 import com.allan.inovatech.dto.request.put.StudentPutDTO;
 import com.allan.inovatech.model.entities.Student;
@@ -23,8 +24,8 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<StudentProfileDTO>> listAll() {
-        List<StudentProfileDTO> listDTO = studentService.findAllStudents();
+    public ResponseEntity<List<StudentGetDTO>> listAll() {
+        List<StudentGetDTO> listDTO = studentService.findAllStudents();
         return ResponseEntity.ok().body(listDTO);
     }
 
@@ -50,10 +51,10 @@ public class StudentController {
         studentService.activeStudent(id);
     }
 
-    @PostMapping
-    public ResponseEntity<StudentProfileDTO> createStudent(@RequestBody @Valid StudentPostDTO dto) {
+    @PostMapping("/create")
+    public ResponseEntity<StudentGetDTO> createStudent(@RequestBody @Valid StudentPostDTO dto) {
         Student student = studentService.createStudent(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(StudentProfileDTO.fromEntity(student));
+        return ResponseEntity.status(HttpStatus.CREATED).body(StudentGetDTO.fromEntity(student));
     }
 
     @PostMapping("/{id}/upload-profile-pic")

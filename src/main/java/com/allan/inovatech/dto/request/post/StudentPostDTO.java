@@ -17,4 +17,5 @@ public record StudentPostDTO(
         @NotBlank(message = "A senha é obrigatória")
         String password
 ) {
+
 }

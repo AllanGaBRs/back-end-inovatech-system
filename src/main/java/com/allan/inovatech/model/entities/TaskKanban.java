@@ -24,7 +24,7 @@ public class TaskKanban {
     private TaskStatus sts = TaskStatus.AFAZER;
 
     @Column(nullable = false)
-    private LocalDate beginDate;
+    private LocalDate beginDate = LocalDate.now();
 
     @Column
     private LocalDate endDate;
