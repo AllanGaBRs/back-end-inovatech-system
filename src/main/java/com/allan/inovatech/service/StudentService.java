@@ -1,8 +1,10 @@
 package com.allan.inovatech.service;
 
 import com.allan.inovatech.dto.profile.StudentProfileDTO;
-import com.allan.inovatech.dto.request.StudentRequestDTO;
+import com.allan.inovatech.dto.request.post.StudentPostDTO;
+import com.allan.inovatech.dto.request.put.StudentPutDTO;
 import com.allan.inovatech.model.entities.Student;
+import com.allan.inovatech.model.enums.StudentStatus;
 import com.allan.inovatech.repository.StudentRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,7 @@ public class StudentService {
         return listDTO;
     }
 
-    public Student createStudent(StudentRequestDTO dto){
+    public Student createStudent(StudentPostDTO dto){
         Student student = new Student();
         student.setName(dto.name());
         student.setCourse(dto.course());
@@ -40,9 +42,44 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
+    public Student updateStudent(Integer id, StudentPutDTO dto){
+        Student student = studentRepository.findById(id).orElseThrow(()
+                -> new EntityNotFoundException("Student not found"));
+        if(student.getStudentStatus() == StudentStatus.INATIVO){
+            throw new IllegalStateException("Aluno inativo");
+        }
+        student.setName(dto.name());
+        student.setCourse(dto.course());
+        student.setEmail(dto.email());
+        return studentRepository.save(student);
+    }
+
+    public void deleteStudent(Integer id){
+        Student student = studentRepository.findById(id).orElseThrow(()
+                -> new EntityNotFoundException("Student not found"));
+        if(student.getStudentStatus() == StudentStatus.INATIVO){
+            throw new IllegalStateException("Aluno já está inativo");
+        }
+        student.setStudentStatus(StudentStatus.INATIVO);
+        studentRepository.save(student);
+    }
+
+    public void activeStudent(Integer id){
+        Student student = studentRepository.findById(id).orElseThrow(()
+                -> new EntityNotFoundException("Student not found"));
+        if(student.getStudentStatus() == StudentStatus.ATIVO){
+            throw new IllegalStateException("Aluno já está ativo");
+        }
+        student.setStudentStatus(StudentStatus.ATIVO);
+        studentRepository.save(student);
+    }
+
     public StudentProfileDTO findStudentProfileById(Integer id){
         Student student = studentRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Student not found"));
+        if(student.getStudentStatus() == StudentStatus.INATIVO){
+            throw new IllegalStateException("Aluno inativo");
+        }
         return StudentProfileDTO.fromEntity(student);
     }
 
@@ -50,6 +87,10 @@ public class StudentService {
         try {
             Student student = studentRepository.findById(studentId)
                     .orElseThrow(() -> new RuntimeException("Student not found"));
+
+            if(student.getStudentStatus() == StudentStatus.INATIVO){
+                throw new IllegalStateException("Aluno inativo");
+            }
 
             student.setProfilePic(file.getBytes());
             studentRepository.save(student);
@@ -62,6 +103,10 @@ public class StudentService {
     public byte[] getProfilePicture(Integer studentId) {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        if(student.getStudentStatus() == StudentStatus.INATIVO){
+            throw new IllegalStateException("Aluno inativo");
+        }
 
         if (student.getProfilePic() == null) {
             throw new RuntimeException("Nenhuma imagem encontrada");
