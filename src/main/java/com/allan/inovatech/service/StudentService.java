@@ -36,6 +36,7 @@ public class StudentService {
 
     public Student createStudent(StudentPostDTO dto){
         Student student = new Student();
+        student.setRa(dto.ra());
         student.setName(dto.name());
         student.setCourse(dto.course());
         student.setEmail(dto.email());
@@ -49,6 +50,7 @@ public class StudentService {
         if(student.getStudentStatus() == StudentStatus.INATIVO){
             throw new IllegalStateException("Aluno inativo");
         }
+        student.setRa(dto.ra());
         student.setName(dto.name());
         student.setCourse(dto.course());
         student.setEmail(dto.email());

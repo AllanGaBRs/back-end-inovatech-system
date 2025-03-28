@@ -63,6 +63,7 @@ public class TestConfig implements CommandLineRunner {
         tk3.setAdm(adm1);
 
         Student st1 = new Student();
+        st1.setRa("252256-1");
         st1.setName("Allan");
         st1.setEmail("allan@gmail.com");
         st1.setCourse(Course.SI);
@@ -70,6 +71,7 @@ public class TestConfig implements CommandLineRunner {
         st1.setRegisterDate(LocalDate.now());
 
         Student st2 = new Student();
+        st2.setRa("568492-1");
         st2.setName("Bruno");
         st2.setEmail("bruno@gmail.com");
         st2.setCourse(Course.ADS);

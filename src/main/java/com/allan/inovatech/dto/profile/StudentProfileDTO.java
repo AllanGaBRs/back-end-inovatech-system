@@ -13,6 +13,7 @@ import java.util.List;
 public record StudentProfileDTO(
 
         Integer id,
+        String ra,
         String name,
         String email,
         Course course,
@@ -32,6 +33,7 @@ public record StudentProfileDTO(
     public static StudentProfileDTO fromEntity(Student student) {
         return new StudentProfileDTO(
                 student.getId(),
+                student.getRa(),
                 student.getName(),
                 student.getEmail(),
                 student.getCourse(),

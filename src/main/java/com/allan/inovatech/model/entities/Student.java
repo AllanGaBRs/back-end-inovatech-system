@@ -17,6 +17,9 @@ public class Student {
     @Column
     private Integer id;
 
+    @Column(nullable = false)
+    private String ra;
+
     @Column(name = "studentName", nullable = false)
     private String name;
 
@@ -64,6 +67,14 @@ public class Student {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getRa() {
+        return ra;
+    }
+
+    public void setRa(String ra) {
+        this.ra = ra;
     }
 
     public String getName() {

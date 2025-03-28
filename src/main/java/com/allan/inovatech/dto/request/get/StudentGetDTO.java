@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 public record StudentGetDTO(
         Integer id,
+        String ra,
         String name,
         String email,
         Course course,
@@ -20,6 +21,7 @@ public record StudentGetDTO(
     public static StudentGetDTO fromEntity(Student student) {
         return new StudentGetDTO(
                 student.getId(),
+                student.getRa(),
                 student.getName(),
                 student.getEmail(),
                 student.getCourse(),
