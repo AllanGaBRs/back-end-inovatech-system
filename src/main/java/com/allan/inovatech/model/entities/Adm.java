@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_adm")
@@ -78,5 +79,27 @@ public class Adm {
 
     public void setChangeCodes(String changeCodes) {
         this.changeCodes = changeCodes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Adm adm = (Adm) o;
+        return Objects.equals(id, adm.id) && Objects.equals(name, adm.name) && Objects.equals(email, adm.email) && Objects.equals(password, adm.password) && Objects.equals(changeCodes, adm.changeCodes) && Objects.equals(tasks, adm.tasks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, email, password, changeCodes, tasks);
+    }
+
+    @Override
+    public String toString() {
+        return "Adm{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password;
     }
 }
