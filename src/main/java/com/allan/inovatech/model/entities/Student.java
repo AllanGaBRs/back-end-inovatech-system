@@ -1,7 +1,7 @@
 package com.allan.inovatech.model.entities;
 
 import com.allan.inovatech.model.enums.Course;
-import com.allan.inovatech.model.enums.StudentStatus;
+import com.allan.inovatech.model.enums.AccountStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -38,7 +38,7 @@ public class Student {
 
     @Enumerated(EnumType.STRING)
     @Column
-    private StudentStatus studentStatus = StudentStatus.ATIVO;
+    private AccountStatus studentStatus = AccountStatus.ATIVO;
 
     @Column
     private String changeCode;
@@ -117,11 +117,11 @@ public class Student {
         this.registerDate = registerDate;
     }
 
-    public StudentStatus getStudentStatus() {
+    public AccountStatus getStudentStatus() {
         return studentStatus;
     }
 
-    public void setStudentStatus(StudentStatus studentStatus) {
+    public void setStudentStatus(AccountStatus studentStatus) {
         this.studentStatus = studentStatus;
     }
 

@@ -1,6 +1,6 @@
 package com.allan.inovatech.model.enums;
 
-public enum StudentStatus {
+public enum AccountStatus {
 
     ATIVO,
     INATIVO;

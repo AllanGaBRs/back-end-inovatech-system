@@ -1,5 +1,7 @@
 package com.allan.inovatech.model.entities;
 
+import com.allan.inovatech.model.enums.AccountStatus;
+import com.allan.inovatech.model.enums.Status;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -22,6 +24,9 @@ public class Adm {
 
     @Column(name = "keypass", nullable = false)
     private String password;
+
+    @Column(name = "status")
+    private AccountStatus accountStatus = AccountStatus.ATIVO;
 
     @Column
     private String changeCodes;
@@ -55,6 +60,14 @@ public class Adm {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
     }
 
     public List<TaskKanban> getTasks() {

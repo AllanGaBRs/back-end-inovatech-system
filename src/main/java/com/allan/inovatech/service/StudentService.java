@@ -5,7 +5,7 @@ import com.allan.inovatech.dto.request.get.StudentGetDTO;
 import com.allan.inovatech.dto.request.post.StudentPostDTO;
 import com.allan.inovatech.dto.request.put.StudentPutDTO;
 import com.allan.inovatech.model.entities.Student;
-import com.allan.inovatech.model.enums.StudentStatus;
+import com.allan.inovatech.model.enums.AccountStatus;
 import com.allan.inovatech.repository.StudentRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class StudentService {
     public Student updateStudent(Integer id, StudentPutDTO dto){
         Student student = studentRepository.findById(id).orElseThrow(()
                 -> new EntityNotFoundException("Student not found"));
-        if(student.getStudentStatus() == StudentStatus.INATIVO){
+        if(student.getStudentStatus() == AccountStatus.INATIVO){
             throw new IllegalStateException("Aluno inativo");
         }
         student.setRa(dto.ra());
@@ -60,27 +60,27 @@ public class StudentService {
     public void deleteStudent(Integer id){
         Student student = studentRepository.findById(id).orElseThrow(()
                 -> new EntityNotFoundException("Student not found"));
-        if(student.getStudentStatus() == StudentStatus.INATIVO){
+        if(student.getStudentStatus() == AccountStatus.INATIVO){
             throw new IllegalStateException("Aluno já está inativo");
         }
-        student.setStudentStatus(StudentStatus.INATIVO);
+        student.setStudentStatus(AccountStatus.INATIVO);
         studentRepository.save(student);
     }
 
     public void activeStudent(Integer id){
         Student student = studentRepository.findById(id).orElseThrow(()
                 -> new EntityNotFoundException("Student not found"));
-        if(student.getStudentStatus() == StudentStatus.ATIVO){
+        if(student.getStudentStatus() == AccountStatus.ATIVO){
             throw new IllegalStateException("Aluno já está ativo");
         }
-        student.setStudentStatus(StudentStatus.ATIVO);
+        student.setStudentStatus(AccountStatus.ATIVO);
         studentRepository.save(student);
     }
 
     public StudentProfileDTO findStudentProfileById(Integer id){
         Student student = studentRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Student not found"));
-        if(student.getStudentStatus() == StudentStatus.INATIVO){
+        if(student.getStudentStatus() == AccountStatus.INATIVO){
             throw new IllegalStateException("Aluno inativo");
         }
         return StudentProfileDTO.fromEntity(student);
@@ -91,7 +91,7 @@ public class StudentService {
             Student student = studentRepository.findById(studentId)
                     .orElseThrow(() -> new RuntimeException("Student not found"));
 
-            if(student.getStudentStatus() == StudentStatus.INATIVO){
+            if(student.getStudentStatus() == AccountStatus.INATIVO){
                 throw new IllegalStateException("Aluno inativo");
             }
 
@@ -107,7 +107,7 @@ public class StudentService {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
 
-        if(student.getStudentStatus() == StudentStatus.INATIVO){
+        if(student.getStudentStatus() == AccountStatus.INATIVO){
             throw new IllegalStateException("Aluno inativo");
         }
 
