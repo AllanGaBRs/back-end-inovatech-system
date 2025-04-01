@@ -31,6 +31,11 @@ public class Adm {
     @Column
     private String changeCodes;
 
+    @Lob
+    //@Column(columnDefinition = "BYTEA") POSTGRESS
+    @Column(columnDefinition = "BLOB") //h2
+    private byte[] profilePic;
+
     @OneToMany(mappedBy = "adm")
     private List<TaskKanban> tasks = new ArrayList<TaskKanban>();
 
@@ -92,6 +97,14 @@ public class Adm {
 
     public void setChangeCodes(String changeCodes) {
         this.changeCodes = changeCodes;
+    }
+
+    public byte[] getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(byte[] profilePic) {
+        this.profilePic = profilePic;
     }
 
     @Override

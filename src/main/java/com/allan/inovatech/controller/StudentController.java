@@ -36,9 +36,9 @@ public class StudentController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<StudentProfileDTO> updateStudent(@PathVariable Integer id, @RequestBody @Valid StudentPutDTO dto) {
+    public ResponseEntity<StudentGetDTO> updateStudent(@PathVariable Integer id, @RequestBody @Valid StudentPutDTO dto) {
         Student student = studentService.updateStudent(id, dto);
-        return ResponseEntity.ok(StudentProfileDTO.fromEntity(student));
+        return ResponseEntity.ok(StudentGetDTO.fromEntity(student));
     }
 
     @PutMapping("/delete/{id}")
@@ -67,6 +67,6 @@ public class StudentController {
     @GetMapping("/{id}/profile-pic")
     public ResponseEntity<byte[]> getProfilePic(@PathVariable Integer id) {
         byte[] image = studentService.getProfilePicture(id);
-        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(image);
+        return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(image);
     }
 }

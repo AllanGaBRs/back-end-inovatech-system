@@ -6,13 +6,15 @@ import com.allan.inovatech.model.entities.Student;
 public record AdmGetDTO(
         Integer id,
         String name,
-        String email
+        String email,
+        String profilePicUrl
 ) {
     public static AdmGetDTO fromEntity(Adm adm){
         return new AdmGetDTO(
                 adm.getId(),
                 adm.getName(),
-                adm.getEmail()
+                adm.getEmail(),
+                "http://localhost:8080/students/" + adm.getId() + "/profile-pic"
         );
     }
 }
