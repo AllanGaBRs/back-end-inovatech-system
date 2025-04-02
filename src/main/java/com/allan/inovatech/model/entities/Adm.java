@@ -39,6 +39,9 @@ public class Adm {
     @OneToMany(mappedBy = "adm")
     private List<TaskKanban> tasks = new ArrayList<TaskKanban>();
 
+    @OneToMany(mappedBy = "adm")
+    private List<Feedback> feedbacks = new ArrayList<Feedback>();
+
     public Adm(){
 
     }
@@ -81,6 +84,14 @@ public class Adm {
 
     public void addTask(TaskKanban task) {
         tasks.add(task);
+    }
+
+    public List<Feedback> getFeedbacks(){
+        return feedbacks;
+    }
+
+    public void addFeedback(Feedback feedback){
+        feedbacks.add(feedback);
     }
 
     public String getEmail() {

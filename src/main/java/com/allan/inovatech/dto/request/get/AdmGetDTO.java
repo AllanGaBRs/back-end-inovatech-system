@@ -14,7 +14,7 @@ public record AdmGetDTO(
                 adm.getId(),
                 adm.getName(),
                 adm.getEmail(),
-                "http://localhost:8080/students/" + adm.getId() + "/profile-pic"
+                "http://localhost:8080/adms/" + adm.getId() + "/profile-pic"
         );
     }
 }

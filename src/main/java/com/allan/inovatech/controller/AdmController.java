@@ -1,5 +1,7 @@
 package com.allan.inovatech.controller;
 
+import com.allan.inovatech.dto.profile.AdmProfileDTO;
+import com.allan.inovatech.dto.profile.StudentProfileDTO;
 import com.allan.inovatech.dto.request.get.AdmGetDTO;
 import com.allan.inovatech.dto.request.post.AdmPostDTO;
 import com.allan.inovatech.dto.request.put.AdmPutDTO;
@@ -19,6 +21,12 @@ public class AdmController {
 
     @Autowired
     private AdmService admService;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AdmProfileDTO> findProfileById(@Valid @PathVariable Integer id) {
+        AdmProfileDTO adm = admService.findAdmProfileById(id);
+        return ResponseEntity.ok().body(adm);
+    }
 
     @PostMapping("/create")
     public ResponseEntity<AdmGetDTO> createAdm(@RequestBody @Valid AdmPostDTO dto){

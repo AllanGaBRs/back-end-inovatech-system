@@ -1,8 +1,11 @@
 package com.allan.inovatech.service;
 
+import com.allan.inovatech.dto.profile.AdmProfileDTO;
+import com.allan.inovatech.dto.profile.StudentProfileDTO;
 import com.allan.inovatech.dto.request.post.AdmPostDTO;
 import com.allan.inovatech.dto.request.put.AdmPutDTO;
 import com.allan.inovatech.model.entities.Adm;
+import com.allan.inovatech.model.entities.Student;
 import com.allan.inovatech.model.enums.AccountStatus;
 import com.allan.inovatech.repository.AdmRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -17,6 +20,15 @@ public class AdmService {
 
     @Autowired
     private AdmRepository admRepository;
+
+    public AdmProfileDTO findAdmProfileById(Integer id){
+        Adm adm = admRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Adm not found"));
+        if(adm.getAccountStatus() == AccountStatus.INATIVO){
+            throw new IllegalStateException("Adm inativo");
+        }
+        return AdmProfileDTO.fromEntity(adm);
+    }
 
     public Adm createAdm(AdmPostDTO dto){
         Adm adm = new Adm();

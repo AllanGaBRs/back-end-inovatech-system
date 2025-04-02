@@ -121,5 +121,6 @@ public class TestConfig implements CommandLineRunner {
 
         feedbackRepository.save(fb1);
 
+        adm1.addFeedback(fb1);
     }
 }
